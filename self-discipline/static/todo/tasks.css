@@ -1,0 +1,31 @@
+/* MAIN STYLES */
+
+/* _________________________________ */
+
+
+.tasks-container {
+    padding: 16px 0;
+}
+.todos-title {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.todos-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.todo-block {
+    padding: .5rem 1rem;
+}
+.todo-deadline, .todo-description {
+    margin-bottom: 5px;
+}
+.todo-deadline {
+    font-style: italic;
+}
+i {
+    margin-right: 5px;
+}
+/* .todo-description {
+}  */

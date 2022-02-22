@@ -1,0 +1,17 @@
+{% extends 'todo/base.html' %}
+{% load static %}
+{% block title %}Log in{% endblock %}
+<link rel="stylesheet" href="{% static 'todo/tasks.css' %}">
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+            <strong>{{ error }}</strong>
+            </div>
+        {% endif %}
+        {{ form.as_p }}
+        <button type="submit">Log in</button>
+    </form>
+{% endblock %}
