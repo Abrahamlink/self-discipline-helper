@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Habit, Category
+from .models import Habit, Category, Day
 
 
 class HabitAdmin(admin.ModelAdmin):

@@ -18,6 +18,18 @@
 .todo-block {
     padding: .5rem 1rem;
 }
+.todo-block strong {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo-buttons {
+    display: flex;
+}
+.todo-buttons form {
+    margin-right: 10px;
+}
 .todo-deadline, .todo-description {
     margin-bottom: 5px;
 }
@@ -27,5 +39,6 @@
 i {
     margin-right: 5px;
 }
+
 /* .todo-description {
 }  */

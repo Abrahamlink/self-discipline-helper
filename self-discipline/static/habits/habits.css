@@ -1,0 +1,37 @@
+.habits-container {
+}
+
+.habits-title {
+    margin: 16px 0;
+}
+
+.habits-wrapper {
+    margin-top: 32px;
+}
+
+.habit-block {
+    padding: 12px;
+    border: 2px solid #333333;
+    border-radius: 5px;
+}
+
+
+.habit {
+}
+
+.habit__title {
+    color: CornflowerBlue;
+}
+.habit__dascription {
+}
+.habit__start-date {
+}
+.habit__start-date i {
+    color: CadetBlue;
+}
+.habit__period {
+    margin: 0;
+}
+.habit__period span {
+    font-weight: bold;
+}

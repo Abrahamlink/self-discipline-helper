@@ -1,0 +1,33 @@
+{% extends 'todo/base.html' %}
+{% load static %}
+{% block title %}My Habits{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'habits/habits.css' %}">
+    <div class="container habits-container">
+        <h1 class="display-3 habits-title">Habits in process</h1>
+        <div class="row">
+            <div class="row habits-wrapper">
+
+                {% for habit in habits %}
+
+                    <div class="card habit-block">
+                      <div class="card-body habit">
+                        <h4 class="card-title habit__title">{{ habit.title }}</h4>
+                        <p class="habit__start-date"><i class="fa-solid fa-calendar fa-lg mr-1"></i>{{ habit.created|date:'d F Y' }}</p>
+                        <p class="card-text habit__dascription">{{ habit.description }}</p>
+                        <p class="text-justify habit__period">Period: <span>{{ habit.period }}days</span></p>
+                        <a href="{% url 'habit_detail' habit.id %}" class="habit__detail-page">Details</a>
+                      </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="habit__create">
+            <a href="{% url 'create_new_habit' %}">
+                <button type="button" class="btn btn-outline-primary">Create new</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'todo/base.html' %}
+{% load static %}
+{% block title %}Create New Habit{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'habits/create.css' %}">
+    <div class="container habit-container">
+        <h1 class="display-3 habit-form-title">Create New Habit</h1>
+        <div class="row habit-form-wrapper">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Create</button>        
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -17,10 +17,28 @@ def todo_list(request):
     if request.user.is_anonymous:
         return redirect('signUpUser')
     try:
-        todos = Task.objects.filter(user=request.user).order_by('-created_date')
+        todos = Task.objects.filter(user=request.user, finish_date=None).order_by('-created_date')
     except TypeError:
         todos = []
     return render(request, template, {'todos': todos, 'user': request.user})
+
+
+def completed_todos(request):
+    template = 'todo/tasks.html'
+
+    if request.user.is_anonymous:
+        return redirect('signUpUser')
+    try:
+        completed = Task.objects.filter(user=request.user).order_by('-created_date')
+    except TypeError:
+        completed = []
+    filtered_by_finish_date = []
+    if len(completed) != 0:
+        for todo in completed:
+            if todo.finish_date is not None:
+                filtered_by_finish_date.append(todo)
+
+    return render(request, template, {'completed': filtered_by_finish_date, 'user': request.user})
 
 
 def create_task(request):
@@ -30,7 +48,7 @@ def create_task(request):
     if request.method == 'GET':
         return render(request, template, context={'form': TaskForm()})
     else:
-        if request.user != 'Anonymous':
+        if not request.user.is_anonymous:
             print(request.POST)
             new_task = Task(
                 title=request.POST['title'],
@@ -52,7 +70,19 @@ def create_task(request):
 def delete_task(request, task_id):
     if request.method == 'POST':
         task = Task.objects.get(pk=task_id)
+        if task.finish_date is not None:
+            link = 'completed_todos'
+        else:
+            link = 'all_todos'
         task.delete()
+    return redirect(link)
+
+
+def complete_task(request, task_id):
+    if request.method == 'POST':
+        task = Task.objects.get(pk=task_id)
+        task.finish_date = datetime.datetime.now()
+        task.save()
     return redirect('all_todos')
 
 

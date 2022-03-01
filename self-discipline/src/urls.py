@@ -25,18 +25,18 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Todo app
-    path('todo', include('todo.urls')),
-    path('', RedirectView.as_view(url='todo', permanent=False)),
+    path('todo/', include('todo.urls')),
+    path('', RedirectView.as_view(url='todo/', permanent=False)),
 
     # Habits app
-    path('habits', include('habits.urls')),
+    path('habits/', include('habits.urls')),
 
     # Registration
-    path('signup', views.signUpUser, name='signUpUser'),
+    path('signup/', views.signUpUser, name='signUpUser'),
 
     # Authentication
-    path('login_user', views.login_user, name='loginUser'),
-    path('logout_user', views.logout_user, name='logoutUser'),
+    path('login_user/', views.login_user, name='loginUser'),
+    path('logout_user/', views.logout_user, name='logoutUser'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

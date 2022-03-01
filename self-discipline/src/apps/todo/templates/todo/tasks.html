@@ -4,16 +4,41 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'todo/tasks.css' %}">
     <div class="container tasks-container">
+        {% if todos|length > 0 %}
         <h1 class="display-3 todos-title">Task list</h1>
+        {% elif completed|length > 0 %}
+        <h1 class="display-3 todos-title">Task list(completed)</h1>
+        {% endif %}
         <div class="row todos-wrapper">
             {% for todo in todos %}
             <div class="alert {% if todo.is_important %}alert-danger{% else %}alert-info{% endif %} todo-block" role="alert">
                 <strong>
                     <h2 class="mr-5">{{ todo.title }}</h2>
-                    <form action="{% url 'delete_task' todo.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit">DELETE</button>
-                    </form>
+                    <div class="todo-buttons">
+                        <form action="{% url 'delete_task' todo.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">DELETE</button>
+                        </form>
+                        <form action="{% url 'complete_task' todo.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">COMPLETE</button>
+                        </form>
+                    </div>
+                </strong>
+                <p class="todo-deadline"><i class="fa-solid fa-calendar fa-lg"></i>{{ todo.deadline|date:'d F Y' }}</p>
+                {% if todo.description != '' %}<p class="todo-description"><i class="fa-solid fa-note fa-lg"></i>{{ todo.description }}</p>{% endif %}
+            </div>                
+            {% endfor %}
+            {% for todo in completed %}
+            <div class="alert alert-dark todo-block" role="alert">
+                <strong>
+                    <h2 class="mr-5">{{ todo.title }}</h2>
+                    <div class="todo-buttons">
+                        <form action="{% url 'delete_task' todo.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">DELETE</button>
+                        </form>
+                    </div>
                 </strong>
                 <p class="todo-deadline"><i class="fa-solid fa-calendar fa-lg"></i>{{ todo.deadline|date:'d F Y' }}</p>
                 {% if todo.description != '' %}<p class="todo-description"><i class="fa-solid fa-note fa-lg"></i>{{ todo.description }}</p>{% endif %}
