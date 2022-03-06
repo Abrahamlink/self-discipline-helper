@@ -1,1 +1,1 @@
-web: gunicorn discipline-manager.wsgi --log-file -
+web: python self-discipline/manage.py runserver 0.0.0.0$PORT
