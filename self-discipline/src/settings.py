@@ -131,3 +131,5 @@ STATICFILES_DIRS = [STATIC_ROOT]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 django_heroku.settings(locals())
+
+CSRF_TRUSTED_ORIGINS = ['https://calm-savannah-68437.herokuapp.com', 'calm-savannah-68437.herokuapp.com']
