@@ -1,9 +1,7 @@
-import datetime
-
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import HabitForm
-from django.contrib.auth.models import User
+import datetime
 
 
 def habits(request):
@@ -12,22 +10,22 @@ def habits(request):
     if not request.user.is_anonymous:
         practice = Habit.objects.filter(user=request.user).order_by('-created')
     else:
-        practice = []
         return redirect('loginUser')
     return render(request, template, context={'habits': practice})
 
 
 def create_new_habit(request):
-    template = 'habits/create.html'
-
     if not request.user.is_anonymous:
         if request.method == 'GET':
+            template = 'habits/create.html'
             return render(request, template, context={'form': HabitForm()})
         else:
+            desc = request.POST['description'].split('\r')
+            desc = ''.join([string.replace('\n', '<br>') for string in desc])
             habit = Habit()
             habit.user = request.user
             habit.title = request.POST['title']
-            habit.description = request.POST['description']
+            habit.description = desc
             habit.period = int(request.POST['period'])
             habit.save()
             for index in range(0, habit.period):
@@ -40,10 +38,17 @@ def create_new_habit(request):
         return redirect('loginUser')
 
 
-def habit_detail(request, pk):
-    template = 'habits/habit_details.html'
+def delete_habit(request, pk):
+    if request.method == 'POST':
+        if not request.user.is_anonymous:
+            habit = Habit.objects.get(pk=pk)
+            habit.delete()
+            return redirect('all_habits')
 
+
+def habit_detail(request, pk):
     if not request.user.is_anonymous:
+        template = 'habits/habit_details.html'
         habit = Habit.objects.get(user=request.user, pk=pk)
         days = Day.objects.filter(habit=habit)
     else:

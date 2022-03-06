@@ -4,11 +4,12 @@
 
 
 .tasks-container {
-    padding: 16px 0;
+    padding: 32px 0;
 }
 .todos-title {
     text-align: center;
     text-transform: uppercase;
+    margin-bottom: .7em;
 }
 
 .todos-wrapper {
@@ -16,6 +17,9 @@
     flex-direction: column;
 }
 .todo-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: .5rem 1rem;
 }
 .todo-block strong {
@@ -24,21 +28,34 @@
     align-items: center;
 }
 
+/* IF it's completed */
+.todo-completed-block .title {
+    font-size: 1.5em;
+}
+.todo-completed-block .todo-deadline {
+    font-size: 1em;
+}
+/* ----------------- */
+
 .todo-buttons {
     display: flex;
+}
+.todo-deadline {
+    font-size: 18px;
 }
 .todo-buttons form {
     margin-right: 10px;
 }
 .todo-deadline, .todo-description {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
-.todo-deadline {
-    font-style: italic;
+.todo-description {
+    margin-top: 5px;
+    font-size: 16px;
 }
 i {
     margin-right: 5px;
 }
-
-/* .todo-description {
-}  */
+.completed-link {
+    margin: 24px auto;
+}

@@ -2,16 +2,20 @@
 {% load static %}
 {% block title %}Create Task{% endblock %}
 {% block content %}
-
-<form method="post">
-    {% csrf_token %}
-    <!-- {% if error %}
-        <div class="alert alert-danger" role="alert">
-        <strong>{{ error }}</strong>
-        </div>
-    {% endif %} -->
-    {{ form.as_p }}
-    <button type="submit">Create</button>
-</form>
+<div class="container task-form-container">
+    <h1 class="display-3 task-form-title" style="text-align: center;">Create New Task</h1>
+    <div class="row task-form-wrapper">
+        <form method="post" style="width: 60%; margin: 10px auto;">
+            {% csrf_token %}
+            <!-- {% if error %}
+                <div class="alert alert-danger" role="alert">
+                <strong>{{ error }}</strong>
+                </div>
+            {% endif %} -->
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-success" style="width: 100%; margin: 32px 0;">Create</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

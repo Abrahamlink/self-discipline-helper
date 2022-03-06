@@ -1,20 +1,18 @@
-from django.forms import ModelForm, TextInput, Textarea, DateInput, DateTimeInput
+from django.forms import ModelForm, TextInput, Textarea, NumberInput
 from .models import Habit
 
 
 class HabitForm(ModelForm):
     class Meta:
         model = Habit
-        fields = ['title', 'description', 'period']
-
-# class TaskForm(ModelForm):
-#     class Meta:
-#         model = Task
-#         fields = ['title', 'description', 'is_important', 'deadline']
-#         widgets = {
-#             'deadline': DateTimeInput(attrs={
-#                 'class': 'form-control',
-#                 'placeholder': 'When it mast be achieved',
-#                 'name': 'deadline',
-#                 'type': 'datetime-local'
-#             })}
+        fields = ['title', 'description']
+        widgets = {
+            'title': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Habit title',
+            }),
+            'description': Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Habit description',
+            }),
+        }

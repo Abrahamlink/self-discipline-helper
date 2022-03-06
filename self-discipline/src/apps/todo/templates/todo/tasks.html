@@ -12,36 +12,48 @@
         <div class="row todos-wrapper">
             {% for todo in todos %}
             <div class="alert {% if todo.is_important %}alert-danger{% else %}alert-info{% endif %} todo-block" role="alert">
-                <strong>
-                    <h2 class="mr-5">{{ todo.title }}</h2>
-                    <div class="todo-buttons">
-                        <form action="{% url 'delete_task' todo.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">DELETE</button>
-                        </form>
-                        <form action="{% url 'complete_task' todo.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">COMPLETE</button>
-                        </form>
-                    </div>
-                </strong>
-                <p class="todo-deadline"><i class="fa-solid fa-calendar fa-lg"></i>{{ todo.deadline|date:'d F Y' }}</p>
-                {% if todo.description != '' %}<p class="todo-description"><i class="fa-solid fa-note fa-lg"></i>{{ todo.description }}</p>{% endif %}
+                
+                <div class="todo__info">
+                    <strong>
+                        <h2 class="title">{{ todo.title }}</h2>
+                    </strong>
+                    <p class="todo-deadline"><i class="fa-solid fa-calendar fa-lg"></i>{% if todo.deadline_is_matched %}{{ todo.deadline|date:'d F Y -' }}<span style="font-weight: bold;">{{ todo.deadline|date:' H:i' }}</span>{% else %}{{ todo.deadline|date:'d F Y' }}{% endif %}</p>
+                    {% if todo.description != '' %}<p class="todo-description"><i class="fa-solid fa-message fa-lg"></i>{{ todo.description|safe }}</p>{% endif %}    
+                </div>
+
+                <div class="todo-buttons">
+                    <form action="{% url 'complete_task' todo.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">COMPLETE</button>
+                    </form>
+                    <form action="{% url 'delete_task' todo.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">DELETE</button>
+                    </form>
+                </div>
+
             </div>                
             {% endfor %}
+            {% if completed|length == 0 %}
+                <a class="completed-link" href="{% url 'completed_todos' %}"><button type="button" class="btn btn-secondary">Completed Tasks</button></a>
+            {% endif %}
             {% for todo in completed %}
-            <div class="alert alert-dark todo-block" role="alert">
-                <strong>
-                    <h2 class="mr-5">{{ todo.title }}</h2>
-                    <div class="todo-buttons">
-                        <form action="{% url 'delete_task' todo.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">DELETE</button>
-                        </form>
-                    </div>
-                </strong>
-                <p class="todo-deadline"><i class="fa-solid fa-calendar fa-lg"></i>{{ todo.deadline|date:'d F Y' }}</p>
-                {% if todo.description != '' %}<p class="todo-description"><i class="fa-solid fa-note fa-lg"></i>{{ todo.description }}</p>{% endif %}
+            <div class="alert alert-dark todo-block todo-completed-block" role="alert">
+
+                <div class="todo__info">
+                    <strong>
+                        <h2 class="title">{{ todo.title }}</h2>
+                    </strong>
+                    <p class="todo-deadline"><i class="fa-solid fa-calendar fa-lg"></i>{{ todo.deadline|date:'d F Y' }}</p>
+                </div>
+
+                <div class="todo-buttons">
+                    <form action="{% url 'delete_task' todo.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger">DELETE</button>
+                    </form>
+                </div>
+
             </div>                
             {% endfor %}
         </div>

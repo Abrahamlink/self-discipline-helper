@@ -1,9 +1,12 @@
 .habit-container {
     margin-bottom: 100px;
+    padding: 32px 16px;
 }
 
 .habit-title {
     margin-bottom: 32px;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .habit-wrapper {

@@ -12,6 +12,17 @@ class Habit(models.Model):
     category = models.ManyToManyField('Category', blank=True, related_name='habit')
     created = models.DateField(auto_now_add=True)
 
+    def implementation(self):
+        all_days = Day.objects.filter(habit=self)
+        past_days = [day for day in all_days if day.date < datetime.date.today()]
+        if Day.objects.filter(date=datetime.date.today(), habit=self)[0].is_completed:
+            past_days.append('completed')
+        return [round(len(past_days) / len(all_days) * 100), len(past_days)]
+
+    def is_today_completed(self):
+        day = Day.objects.filter(habit=self, date=datetime.date.today())[0]
+        return day.is_completed
+
     class Meta:
         verbose_name = 'Habit'
         verbose_name_plural = 'Habits'

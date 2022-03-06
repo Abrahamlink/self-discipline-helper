@@ -4,14 +4,45 @@
 <link rel="stylesheet" href="{% static 'todo/tasks.css' %}">
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {% if error %}
-            <div class="alert alert-danger" role="alert">
-            <strong>{{ error }}</strong>
-            </div>
-        {% endif %}
-        {{ form.as_p }}
-        <button type="submit">Log in</button>
-    </form>
+    <style>
+        form {
+            width: 60%;
+            margin: 32px auto;
+        }
+        form button {
+            margin: 16px 0;
+            float: left;
+            font-size: 1.1em !important;
+            padding: 8px 16px !important;
+        }
+        form input {
+            box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.69);
+        }
+        .login__info h1 {
+            text-align: center;
+            width: 100%;
+        }
+        .login__info p {
+            text-align: center;
+            font-size: 1.2em;
+        }
+    </style>
+    <div class="container login-form-container">
+        <div class="login__info">
+            <h1 class="display-3">Login</h1>
+            <p>if you already have own account</p>
+        </div>
+        <div class="row login-form-wrapper">
+            <form method="post">
+                {% csrf_token %}
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                    <strong>{{ error }}</strong>
+                    </div>
+                {% endif %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success">Log in</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

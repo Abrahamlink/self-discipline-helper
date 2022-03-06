@@ -1,12 +1,26 @@
 .habits-container {
+    padding: 32px 0;
 }
-
-.habits-title {
+.menu-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin: 16px 0;
+}
+.habits-title {
+    text-align: center;
+}
+.menu-title a {
+    position: relative;
+    top: 10px;
+    margin-right: 50px;
 }
 
 .habits-wrapper {
     margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1em;
 }
 
 .habit-block {
@@ -17,12 +31,15 @@
 
 
 .habit {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .habit__title {
     color: CornflowerBlue;
 }
-.habit__dascription {
+.habit__description {
 }
 .habit__start-date {
 }
@@ -34,4 +51,14 @@
 }
 .habit__period span {
     font-weight: bold;
+}
+
+.habit__detail-page button {
+    margin: 10px 0;
+}
+
+
+
+.interaction {
+    width: 100%;
 }

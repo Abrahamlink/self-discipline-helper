@@ -4,30 +4,42 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'habits/habits.css' %}">
     <div class="container habits-container">
-        <h1 class="display-3 habits-title">Habits in process</h1>
-        <div class="row">
-            <div class="row habits-wrapper">
-
-                {% for habit in habits %}
-
-                    <div class="card habit-block">
-                      <div class="card-body habit">
-                        <h4 class="card-title habit__title">{{ habit.title }}</h4>
-                        <p class="habit__start-date"><i class="fa-solid fa-calendar fa-lg mr-1"></i>{{ habit.created|date:'d F Y' }}</p>
-                        <p class="card-text habit__dascription">{{ habit.description }}</p>
-                        <p class="text-justify habit__period">Period: <span>{{ habit.period }}days</span></p>
-                        <a href="{% url 'habit_detail' habit.id %}" class="habit__detail-page">Details</a>
-                      </div>
-                    </div>
-
-                {% endfor %}
-
-            </div>
-        </div>
-        <div class="habit__create">
+        <div class="habit-title menu-title">
+            <h1 class="display-3 habits-title">Habits in process</h1>
             <a href="{% url 'create_new_habit' %}">
                 <button type="button" class="btn btn-outline-primary">Create new</button>
             </a>
         </div>
+        <div class="row habits-wrapper">
+
+            {% for habit in habits %}
+
+                <div class="card habit-block" {% if habit.is_today_completed %}{% else %}style="box-shadow: 0 0 10px #000000cc;"{% endif %}>
+                    <div class="card-body habit">
+                        <div class="habit__info">
+                            <h4 class="card-title habit__title">{{ habit.title }}</h4>
+                            <p class="habit__start-date"><i class="fa-solid fa-calendar fa-lg mr-1"></i>{{ habit.created|date:'d F Y' }}</p>
+                            {% if habit.description != '' %}<p class="card-text habit__description">{{ habit.description|safe }}</p>{% endif %}
+                            <p class="text-justify habit__period">Period: <span>{{ habit.period }} days</span></p>
+                        </div>
+                        
+                        <div class="habit_user-interactive">
+                            <a href="{% url 'habit_detail' habit.id %}" class="habit__detail-page">
+                                <button type="submit" class="btn btn-primary interaction">Details</button>
+                            </a>
+                            <form action="{% url 'delete_habit' habit.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger interaction">DELETE</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="progress" style="border: 1px solid #777;">
+                    <div class="progress-bar" role="progressbar" style="width: {{ habit.implementation.0 }}%" aria-valuenow="{{ habit.implementation.1 }}" aria-valuemin="0" aria-valuemax="{{ habit.period }}"></div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+        
     </div>
 {% endblock %}

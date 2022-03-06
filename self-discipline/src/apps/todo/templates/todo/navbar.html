@@ -1,37 +1,49 @@
 {% block navbar %}
+<style>
+.navbar-nav {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+</style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'all_todos' %}">Todos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'completed_todos' %}">Completed</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'all_habits' %}">Habits</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'create_task' %}">New Task</a>
-      </li>
-      {% if user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Hello, {{ user.username }}</a>
-      </li>
-      <li class="nav-item"> 
-        <form action="{% url 'logoutUser' %}" method="post">
-          {% csrf_token %}
-          <button type="submit">Logout</button>
-        </form>
-      </li>
-      {% else %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'loginUser' %}">Log in</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'signUpUser' %}">SignUp</a>
-      </li>
-      {% endif %}
+      
+      <div class="all-time-displayed d-flex flex-row">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'create_task' %}">New Task</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'all_todos' %}">Todos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'all_habits' %}">Habits</a>
+        </li>
+      </div>
+
+      <div class="conditions-displayed d-flex flex-row">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <span class="nav-link disabled" style="color: rgba(0,0,0,.5);">Hello, {{ user.username }}</span>
+        </li>
+        <li class="nav-item"> 
+          <form action="{% url 'logoutUser' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-dark">Logout</button>
+          </form>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'loginUser' %}">Log in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'signUpUser' %}">SignUp</a>
+        </li>
+        {% endif %}
+      </div>
+
     </ul>
   </div>
 </nav>

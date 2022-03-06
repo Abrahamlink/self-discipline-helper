@@ -3,7 +3,7 @@ from .models import Habit, Category, Day
 
 
 class HabitAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created', 'period')
+    list_display = ('title', 'created', 'period', 'id')
 
 
 class CategoryAdmin(admin.ModelAdmin):
