@@ -1,1 +1,1 @@
-web: gunicorn self-discipline.wsgi:application --log-file -
+web: gunicorn self-discipline/src.wsgi:application --log-file -
