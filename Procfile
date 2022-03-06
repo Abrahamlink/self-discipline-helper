@@ -1,0 +1,1 @@
+web: gunicorn discipline-manager.wsgi --log-file -
