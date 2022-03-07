@@ -6,7 +6,6 @@ from .forms import TaskForm, SignUpForm, LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-from django.utils import timezone
 import datetime
 from zoneinfo import ZoneInfo
 
