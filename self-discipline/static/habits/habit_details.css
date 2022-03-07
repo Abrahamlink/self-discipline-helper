@@ -22,6 +22,7 @@
 }
 .current {
     margin: 7px 0;
+    padding: 1.15rem 3rem;
     border: 5px ridge rgb(184, 177, 143);
 }
 .day__item span {
@@ -42,4 +43,12 @@
 }
 .day__item .uncompleted {
     right: 26px;
-} 
+}
+
+.day__item form {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+}

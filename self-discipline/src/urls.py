@@ -38,8 +38,7 @@ urlpatterns = [
     path('login_user/', views.login_user, name='loginUser'),
     path('logout_user/', views.logout_user, name='logoutUser'),
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
-              + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if not settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()

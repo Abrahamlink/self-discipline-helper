@@ -17,12 +17,14 @@
                     {% elif day.is_completed == False and day.date < today %}
                         <i class="fa-solid fa-xmark day-completed uncompleted"></i>
                     {% endif %}
+                    
                     {% if day.today and day.is_completed == False %}
                         <form action="{% url 'complete_day' day.id %}" method="post">
                             {% csrf_token %}
-                            <button type="submit">DONE</button>
+                            <button type="submit" class="btn btn-success">DONE</button>
                         </form>
                     {% endif %}
+                    
                 </li>
                 {% endfor %}
             </ul>

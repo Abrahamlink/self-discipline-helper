@@ -123,13 +123,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = Path(BASE_DIR / 'static')
-STATICFILES_DIRS = [STATIC_ROOT]
+if not DEBUG:
+    STATIC_ROOT = Path(BASE_DIR / 'static/')
+else:
+    STATICFILES_DIRS = [Path(BASE_DIR / 'static/')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-django_heroku.settings(locals())
-
-CSRF_TRUSTED_ORIGINS = ['https://calm-savannah-68437.herokuapp.com']
+# django_heroku.settings(locals())
+#
+# CSRF_TRUSTED_ORIGINS = ['https://calm-savannah-68437.herokuapp.com']
