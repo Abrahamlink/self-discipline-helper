@@ -34,7 +34,7 @@
 
             </div>                
             {% endfor %}
-            {% if completed|length == 0 %}
+            {% if completed|length == 0 and todos|length != 0 %}
                 <a class="completed-link" href="{% url 'completed_todos' %}"><button type="button" class="btn btn-secondary">Completed Tasks</button></a>
             {% endif %}
             {% for todo in completed %}

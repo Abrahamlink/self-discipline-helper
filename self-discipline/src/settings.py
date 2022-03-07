@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-+zvkh@p%pv3zi51+$7*0p53_)69gg5zsy8_2$cqegv@6fqtk1w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["calm-savannah-68437.herokuapp.com", "chrome-extension://a3a34fbb-4294-4d0b-bd31-23ce5fb417c6"]
+ALLOWED_HOSTS = ["https://discipline-manager.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
